@@ -1,0 +1,50 @@
+name: Claude PR Assistant
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  claude-pr-assistant:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body || '', '@claude')) ||
+      (github.event_name == 'issues' && contains(github.event.issue.body || '', '@claude'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude PR Assistant
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          timeout_minutes: "60"
+          custom_instructions: |
+            あなたは汎用PRアシスタントです。
+            このリポジトリは特定技術（dbt等）に限定しない前提で、すべてのコメントやレビュー依頼を一般的なソフトウェア開発観点で扱ってください。
+            常に日本語で、簡潔かつ建設的に返答してください。
+
+            ## 応答ルール
+            1) 依頼内容をまず1〜2行で要約する
+            2) 技術的な影響（ロジック・セキュリティ・運用）を優先度付きで整理する
+            3) 具体的な修正案を短く提示する
+            4) 不明点や追加確認が必要な点は質問として明示する
+
+            ## 安全性
+            - シークレット、APIキー、トークン、個人情報、内部IP等を検出した場合は最優先で指摘する

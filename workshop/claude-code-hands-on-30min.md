@@ -1,0 +1,116 @@
+# Claude Code ハンズオン
+
+テーマ：**Streamlitでデータ可視化アプリを作る**
+
+---
+
+受講者の操作制約（本編）  
+- **インストール系コマンド**  
+  - `brew install --cask claude-code`
+  - `irm https://claude.ai/install.ps1 | iex`
+  - `winget install Anthropic.ClaudeCode`
+- `claude` 起動
+- ` /login`
+- `/` で始まる Claude Code コマンド（`/help`, `/help compact`, `/compact`, `/skills`, `/agents`, `/status`）
+
+本編ではそれ以外のCLIコマンドは打たなくてOKです。
+
+## Step 0: ゴール
+- Claude Code を起動できる
+- `/help`, `/compact`, `/skills`, `/agents`, `/status` を使える
+- `streamlit` 用のSkillを実際に自分で登録する
+- `app.py` を作って可視化仕様を自然言語で確認できる
+- 同梱データ `workshop/streamlit-claude-lab/data/sample.csv` は、1,000行の架空受注データ（`order_date`, `region`, `product`, `orders`, `sales`）
+- 必要な環境は会場側で既に整えた前提で進めるため、アプリ実行に必要な追加コマンドは不要
+
+## Step 1: インストールと起動
+環境に合わせてインストールします。
+
+### macOS / Linux / WSL
+
+```bash
+brew install --cask claude-code
+```
+
+### Windows
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+または
+
+```powershell
+winget install Anthropic.ClaudeCode
+```
+
+すでにインストール済みなら、このインストールブロックは飛ばしてOK。
+
+```text
+claude
+```
+
+初回のみ ` /login` が必要。起動後、次を入力欄へそのまま入力。
+
+```text
+/help
+/help compact
+/skills
+/agents
+/status
+/compact このセッションの進め方を短く要約
+```
+
+## Step 2: Skill を確認（読み込み）
+
+このハンズオンで使う `developing-with-streamlit` は、まずこの画面で反映させます。  
+起動後、以下を順番に打ってください。
+
+```text
+/skills
+```
+
+次に、Skill 配下に追加してください（事前配布済みフォルダをそのまま反映する前提）。
+
+```bash
+cp -r developing-with-streamlit ~/.claude/skills/
+```
+
+再度 `/skills` で反映を確認してください。
+
+## Step 3: 生成内容の受け取り
+
+ここであなたが打つのは、以降の `developing-with-streamlit` 指示だけです。  
+Claude が返す実装内容を確認し、追加修正は Step5 へ進みます。
+
+## Step 4: Claudeで最初のアプリを作らせる
+
+`workshop/streamlit-claude-lab` の `data/sample.csv` を使って、以下を依頼します。
+
+```text
+developing-with-streamlit の技能で、次を作ってください。
+- app.py を作成
+- data/sample.csv を使った月次売上の集計可視化
+- ラインチャートと棒グラフを表示
+- 期間フィルタ（start_date と end_date）を作成
+- データ表を表示
+- 依存関係を使って requirements.txt も作成
+- 実行できる最小構成にしてください
+```
+
+## Step 5: 改善を追加で依頼する
+
+```text
+自由に作ってください。好みの改善を1つだけ入れてください。
+
+まず3つの改善案を出してから、最後に1つだけ実装してください。
+```
+
+## Step 6: 最後のレビュー指示（3分）
+
+```text
+/compact 今の実装の課題と改善ポイントを3つだけ日本語で
+/compact 学んだ操作（/help, /compact, /skills, /agents, /status）と今回使ったskillの使い方を3行で要約
+```
+
+これで30分分を終了。

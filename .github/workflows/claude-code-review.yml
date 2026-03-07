@@ -1,0 +1,56 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Claude Code Review
+        id: claude-review
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          allowed_bots: "dependabot,github-actions,claude"
+
+          claude_args: |
+            --model sonnet
+            --allowedTools mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),WebFetch,WebSearch
+
+          prompt: |
+            あなたはPRレビュアーです。以下の変更を日本語でレビューしてください。
+            対象は汎用のソフトウェアプロジェクト（特定フレームワーク前提なし）として扱ってください。
+
+            ## レビュー方針
+            - 最終的に実装が安全にマージ可能か判断する観点でレビューする
+            - 指摘は優先度の高い順（High/Medium/Low）で並べる
+            - 具体的なファイルと行番号（可能な場合）を示す
+            - 否定的な指摘も改善案をセットで返す
+
+            ## 観点
+            1. 正確性（ロジックの間違い・回帰リスク）
+            2. セキュリティ（認証、認可、入力検証、シークレット流出）
+            3. パフォーマンス（不要な計算・重複処理・I/O）
+            4. 可読性（命名、責務分離、ドキュメント性）
+            5. 運用性（テスト、変更影響、観測可能性）
+            6. リリース観点（データ整合性、互換性、ロールバックしやすさ）
+
+            ## 出力形式
+            - 総評: 1〜2段落
+            - 重要度別指摘: High / Medium / Low
+            - 各指摘は「場所」「理由」「修正案」で構成
+            - 最後に「承認可否」を `approve` / `request changes` / `need clarification` で明示
+            - 重要な脆弱性・秘密情報（内部IP、トークン、キー等）があれば最優先で記載
+            - 問題がなければ「指摘なし」と明確に返す
+
