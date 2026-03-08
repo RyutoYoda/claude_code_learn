@@ -4,14 +4,14 @@
 
 ---
 
-受講者の操作制約（本編）  
+操作制約
 - **インストール系コマンド**  
   - `brew install --cask claude-code`
   - `irm https://claude.ai/install.ps1 | iex`
   - `winget install Anthropic.ClaudeCode`
 - `claude` 起動
 - ` /login`
-- `/` で始まる Claude Code コマンド（`/help`, `/help compact`, `/compact`, `/skills`, `/agents`, `/status`）
+- `/` で始まる Claude Code コマンド（`/help`, `/help compact`, `/compact`, `/skills`, `/agents`, `/status`, `/security-review`）
 
 本編ではそれ以外のCLIコマンドは打たなくてOKです。
 
@@ -60,6 +60,17 @@ claude
 /status
 /compact このセッションの進め方を短く要約
 ```
+
+### 各コマンドの役割
+
+| コマンド | 何ができる？ |
+|---|---|
+| `/help` | Claude Code の使い方・コマンド一覧を表示。困ったらまずこれ |
+| `/compact` | 会話履歴を要約して圧縮する。コンテキストが長くなったらリセット代わりに使う。引数にメッセージを渡すと、要約しつつ次の指示も出せる |
+| `/skills` | 登録済みのスキル（専門知識テンプレート）を一覧表示。スキルがあると Claude の出力品質が上がる |
+| `/agents` | カスタムエージェント（`.claude/agents/` 配下）を一覧表示。特定タスク専用の指示セットを呼び出せる |
+| `/status` | 現在のセッション情報（モデル、権限モード、コンテキスト使用量など）を確認 |
+| `/security-review` | 現在のブランチの差分をセキュリティ観点でレビュー。SQLインジェクションやXSSなどの脆弱性を自動チェックしてくれる |
 
 ## Step 2: Skill を確認（読み込み）
 
@@ -113,4 +124,4 @@ developing-with-streamlit の技能で、次を作ってください。
 /compact 学んだ操作（/help, /compact, /skills, /agents, /status）と今回使ったskillの使い方を3行で要約
 ```
 
-これで30分分を終了。
+これで30分を終了。
