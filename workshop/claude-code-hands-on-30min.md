@@ -117,11 +117,3 @@ developing-with-streamlit の技能で、次を作ってください。
 まず3つの改善案を出してから、最後に1つだけ実装してください。
 ```
 
-## Step 6: 最後のレビュー指示（3分）
-
-```text
-/compact 今の実装の課題と改善ポイントを3つだけ日本語で
-/compact 学んだ操作（/help, /compact, /skills, /agents, /status）と今回使ったskillの使い方を3行で要約
-```
-
-これで30分を終了。
