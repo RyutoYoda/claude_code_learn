@@ -72,6 +72,9 @@ claude
 | `/status` | 現在のセッション情報（モデル、権限モード、コンテキスト使用量など）を確認 |
 | `/security-review` | 現在のブランチの差分をセキュリティ観点でレビュー。SQLインジェクションやXSSなどの脆弱性を自動チェックしてくれる |
 
+/skills の例
+<img width="526" height="223" alt="スクリーンショット 2026-03-09 0 49 26" src="https://github.com/user-attachments/assets/9ac1518d-e78c-41e8-a366-e2b72a550404" />
+
 ## Step 2: Skill を確認（読み込み）
 
 このハンズオンで使う `developing-with-streamlit` は、まずこの画面で反映させます。  
