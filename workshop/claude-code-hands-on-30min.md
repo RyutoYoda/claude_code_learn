@@ -85,11 +85,13 @@ claude
 /skills
 ```
 
-次に、Skill 配下に追加してください（事前配布済みフォルダをそのまま反映する前提）。
+次に、Skill 配下に追加してください。
 
 ```bash
-cp -r developing-with-streamlit ~/.claude/skills/
+git clone https://github.com/streamlit/agent-skills.git /tmp/agent-skills                                                  
+cp -r /tmp/agent-skills/developing-with-streamlit ./.claude/skills/ 
 ```
+https://github.com/streamlit/agent-skills/tree/main/developing-with-streamlit
 
 再度 `/skills` で反映を確認してください。
 
