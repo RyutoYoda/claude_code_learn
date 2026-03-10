@@ -64,9 +64,40 @@ claude
 | `/status` | 現在のセッション情報（モデル、権限モード、コンテキスト使用量など）を確認 |
 | `/security-review` | 現在のブランチの差分をセキュリティ観点でレビュー。SQLインジェクションやXSSなどの脆弱性を自動チェックしてくれる |
 
-(例)/status
+### （例）`/status` の画面構成
+
+#### Usage（使用量タブ）
+
+上が今のセッションのAPIトークン使用量（日次リセット）
+下が今週の累計使用量（全モデル合計・週次リセット）
 
 <img width="526" height="223" alt="スクリーンショット 2026-03-09 0 49 26" src="https://github.com/user-attachments/assets/9ac1518d-e78c-41e8-a366-e2b72a550404" />
+
+#### Config（設定タブ）
+
+| 設定項目 | 値 | 説明 |
+|---|---|---|
+| Auto-compact | true | コンテキストが長くなったとき自動で圧縮する |
+| Show tips | true | 操作のヒントをUI上に表示する |
+| Reduce motion | false | アニメーションを減らすアクセシビリティ設定 |
+| Thinking mode | true | Claude が思考過程を表示するモード |
+| Rewind code (checkpoints) | true | コード変更前にチェックポイントを保存し巻き戻せる |
+| Verbose output | false | 詳細なログ出力を有効にする |
+| Terminal progress bar | true | 処理中にプログレスバーを表示する |
+| Default permission mode | Default | ファイル操作などの許可モード（Default / Auto approve など） |
+| Respect .gitignore in file picker | true | ファイル選択時に .gitignore を考慮する |
+| Always copy full response | false | /copy 時に全レスポンスを自動コピーする |
+| Auto-update channel | latest | Claude Code の自動更新チャンネル |
+| Theme | Dark mode (colorblind-friendly) | UI テーマ（色覚特性に配慮したダークモード） |
+| Notifications | Auto | 通知の表示タイミング |
+| Output style | default | 出力フォーマットのスタイル |
+| Language | Default (English) | 表示言語 |
+| Editor mode | normal | エディタの操作モード |
+| Show PR status footer | true | PR のステータスをフッターに表示する |
+| Model | Default (recommended) | 使用する Claude モデル |
+| Auto-install IDE extension | true | IDE 拡張機能を自動インストールする |
+| Claude in Chrome enabled by default | true | Chrome 拡張のデフォルト有効化 |
+| Enable Remote Control for all sessions | default | 全セッションでリモート操作を許可するか |
 
 ## Step 2: Skill を確認（読み込み）
 
