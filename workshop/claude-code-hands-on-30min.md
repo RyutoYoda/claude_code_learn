@@ -1,19 +1,7 @@
 # Claude Code ハンズオン
 
-テーマ：**Streamlitでデータ可視化アプリを作る**
+テーマ：**ClaudeCodeを使ってデータ可視化アプリを作る**
 
----
-
-操作制約
-- **インストール系コマンド**  
-  - `brew install --cask claude-code`
-  - `irm https://claude.ai/install.ps1 | iex`
-  - `winget install Anthropic.ClaudeCode`
-- `claude` 起動
-- ` /login`
-- `/` で始まる Claude Code コマンド（`/help`, `/help compact`, `/compact`, `/skills`, `/agents`, `/status`, `/security-review`）
-
-本編ではそれ以外のCLIコマンドは打たなくてOKです。
 
 ## Step 0: ゴール
 - Claude Code を起動できる
@@ -31,7 +19,12 @@
 ```bash
 brew install --cask claude-code
 ```
-
+### curl
+```
+curl -fsSL https://claude.ai/install.sh | bash
+## homeディレクトリへ
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
+```
 ### Windows
 
 ```powershell
