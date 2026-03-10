@@ -20,9 +20,8 @@
 brew install --cask claude-code
 ```
 ### curl
-```
+```curl
 curl -fsSL https://claude.ai/install.sh | bash
-## homeディレクトリへ
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 ```
 ### Windows
