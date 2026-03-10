@@ -3,7 +3,7 @@
 テーマ：**ClaudeCodeを使ってデータ可視化アプリを作る**
 
 
-## Step 0: ゴール
+## ゴール
 - Claude Code を起動できる
 - `/help`, `/compact`, `/skills`, `/agents`, `/status` を使える
 - `streamlit` 用のSkillを実際に自分で登録する
