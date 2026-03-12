@@ -13,7 +13,10 @@
 
 ## Step 1: インストールと起動
 環境に合わせてインストールします。
-
+### このリポジトリをIDEにクローン
+```
+git clone https://github.com/RyutoYoda/claude_code_learn.git
+```
 ### macOS / Linux / WSL
 
 ```bash
